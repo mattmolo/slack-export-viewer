@@ -7,24 +7,24 @@
           href="{{ url_for('static', filename='viewer.css') }}">
 </head>
 <body>
-<div id="fixed">
+<div id="sidebar">
     <h3>Channels</h3>
-    {% for channel in channels %}
-        {% if channel == name %}
-        <a href="{{ url_for('channel_name', name=channel) }}">
-            <span style="background-color: #ab9ba9">
+    <div class="overflow-scroll">
+        {% for channel in channels %}
+            {% if channel == name %}
+            <a href="{{ url_for('channel_name', name=channel) }}" id="channel-selected">
                 #{{ channel }}
-            </span>
-        </a>
-        {% else %}
-        <a href="{{ url_for('channel_name', name=channel) }}">
-            #{{ channel }}
-        </a>
-        {% endif %}
-        <br />
-    {% endfor %}
+            </a>
+            {% else %}
+            <a href="{{ url_for('channel_name', name=channel) }}">
+                #{{ channel }}
+            </a>
+            {% endif %}
+            <br />
+        {% endfor %}
+    </div>
 </div>
-<div class="messages" id="fluid">
+<div id="messages">
     {% for message in messages %}
     <div>
         <img src="{{ message.img }}"/>
@@ -37,5 +37,9 @@
     <br/>
     {% endfor %}
 </div>
+<script type="text/javascript">
+    var messages = document.getElementById("messages");
+    messages.scrollTop = messages.scrollHeight;
+</script>
 </body>
 </html>

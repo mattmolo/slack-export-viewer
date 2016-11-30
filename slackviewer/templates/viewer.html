@@ -11,13 +11,28 @@
     <h3>Channels</h3>
     <div class="overflow-scroll">
         {% for channel in channels %}
-            {% if channel == name %}
-            <a href="{{ url_for('channel_name', name=channel) }}" id="channel-selected">
-                #{{ channel }}
+            {% if channel['name'] == name %}
+            <a href="{{ url_for('channel_name', name=channel['name']) }}" id="channel-selected">
+                #{{ channel['name'] }}
             </a>
             {% else %}
-            <a href="{{ url_for('channel_name', name=channel) }}">
-                #{{ channel }}
+            <a href="{{ url_for('channel_name', name=channel['name']) }}">
+                #{{ channel['name'] }}
+            </a>
+            {% endif %}
+            <br />
+        {% endfor %}
+    </div>
+    <h3>Archived Channels</h3>
+    <div class="overflow-scroll">
+        {% for channel in archived_channels %}
+            {% if channel['name'] == name %}
+            <a href="{{ url_for('channel_name', name=channel['name']) }}" id="channel-selected">
+                #{{ channel['name'] }}
+            </a>
+            {% else %}
+            <a href="{{ url_for('channel_name', name=channel['name']) }}">
+                #{{ channel['name'] }}
             </a>
             {% endif %}
             <br />

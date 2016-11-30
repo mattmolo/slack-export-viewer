@@ -141,6 +141,7 @@ class Message(object):
         message = message.replace("\n<li>", "<li>")
         # Indiscriminately replace everything else
         message = message.replace("\n", "<br />")
+        message = message.replace("<p></p>", "")
 
         # Introduce unicode emoji
         message = emoji.emojize(message, use_aliases=True)

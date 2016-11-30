@@ -16,6 +16,7 @@ def compile_channels(path, user_data, channel_data):
     channels = get_channel_list(path)
     chats = {}
     for channel in channels:
+        c_id = [c for c in channel_data.keys() if channel_data[c]['name'] == channel][0]
         channel_dir_path = os.path.join(path, channel)
         messages = []
         for day in sorted(os.listdir(channel_dir_path)):
@@ -23,7 +24,10 @@ def compile_channels(path, user_data, channel_data):
                 day_messages = json.load(f)
                 messages.extend([Message(user_data, channel_data, d) for d in
                                  day_messages])
-        chats[channel] = messages
+        chats[channel] = {
+            "messages": messages,
+            "archived": channel_data[c_id]['is_archived']
+        }
     return chats
 
 
